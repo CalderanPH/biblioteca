@@ -1,0 +1,11 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #D3CFA6;
+  color: #FFF;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 100px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<app-cabecalho></app-cabecalho>
+<body>
+<br><br>
+<div>
+  <br>
+  <h1>LOGIN</h1>
+  <br>
+  <p class="alinhar">Login</p>
+  <input class="area-texto" type="email" />
+  <p class="alinhar" (keyup)="onkeyUP($event)">Senha</p>
+  <input class="area-texto" type="password" />
+</div>
+<br>
+  <div>
+  <button class="botao-default" type="submit" >Entrar</button>
+  </div>
+  <br>
+  <div>
+  <button class="cadastro" type="submit" (click)="botaoClicado()" >Cadastrar sua conta</button>
+  </div>
+</body>
+<app-rodape></app-rodape>
+</html>
