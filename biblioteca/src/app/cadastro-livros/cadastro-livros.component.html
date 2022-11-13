@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=], initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<app-cabecalho></app-cabecalho>
+<form>
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <h1 class="alinhar">Cadastro Livro</h1>
+  <label class="alinhar">Nome</label>
+  <input class="area-texto alinhar" type="nome" name="nome" id="nome" [(ngModel)]="livros.nome" required />
+  <label class="alinhar">Quantidade de Páginas</label>
+  <input class="area-texto alinhar" type="quantidadePaginas" name="quantidadePaginas" id="quantidadePaginas"
+    [(ngModel)]="livros.quantidadePaginas" required />
+  <label class="alinhar">Gênero</label>
+  <input class="area-texto alinhar" type="genero" name="genero" id="genero" [(ngModel)]="livros.genero" required />
+  <label class="alinhar">Autor</label>
+  <input class="area-texto alinhar" type="autor" name="autor" id="autor" [(ngModel)]="livros.autor" required />
+  <label class="alinhar">Editora</label>
+  <input class="area-texto alinhar" type="editora" name="editora" id="editora" [(ngModel)]="livros.editora" required />
   <div>
-    <p>Nome</p>
-    <input name="nome">
-    <p>E-mail</p>
-    <input name="email">
-    <p>Idade</p>
-    <input name="idade">
-    <p>Senha</p>
-    <input name="senha">
-  </div>
-</body>
-</html>
+    <br>
+    <div>
+      <button type="submit" class="botao-default alinhar">Salvar</button>
+    </div>
+    <br />
+    <div>
+      <button type="button" class="alinhar cadastro" [routerLink]="['/listar-livros']">Cancelar</button>
+    </div>
+    <app-rodape></app-rodape>

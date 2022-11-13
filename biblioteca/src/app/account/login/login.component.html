@@ -1,0 +1,23 @@
+<app-cabecalho></app-cabecalho>
+<form (ngSubmit)="onSubmit()" #form="ngForm">
+  <br /><br />
+  <div>
+    <br />
+    <h1 class="alinhar">LOGIN</h1>
+    <br />
+    <label class="alinhar">Login</label>
+    <input class="area-texto alinhar" type="email" name="email" id="email" [(ngModel)]="login.email" required />
+    <label class="alinhar">Senha</label>
+    <input class="area-texto alinhar" type="password" name="password" id="password" [(ngModel)]="login.password"
+      required />
+  </div>
+  <br />
+  <div>
+    <button type="submit" class="botao-default alinhar" [disabled]="form.form.invalid">Entrar</button>
+  </div>
+  <br />
+  <div>
+    <button type="button" class="alinhar cadastro" [routerLink]="['/cadastrar-usuario']">Cadastrar sua conta</button>
+  </div>
+</form>
+<app-rodape></app-rodape>
