@@ -1,26 +1,48 @@
 <app-cabecalho></app-cabecalho>
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-  <br /><br />
-  <br /><br />
-  <br /><br />
-  <h1 class="alinhar">Cadastro Usuario</h1>
-  <label class="alinhar">Nome</label>
-  <input class="area-texto alinhar" type="nome" name="nome" id="nome" [(ngModel)]="account.nome" required />
-  <label class="alinhar">E-mail</label>
-  <input class="area-texto alinhar" type="email" name="email" id="email" [(ngModel)]="account.email" required />
-  <label class="alinhar">Idade</label>
-  <input class="area-texto alinhar" type="idade" name="idade" id="idade" [(ngModel)]="account.idade" required />
-  <label class="alinhar">Senha</label>
-  <input class="area-texto alinhar" type="password" name="password" id="password" [(ngModel)]="account.password"
-    required />
+<br /><br />
+<br /><br />
+<br /><br />
+<h1 class="alinhar">Cadastro Usuario</h1>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label class="alinhar" for="name">Nome</label>
+    <input type="text" formControlName="name" class="area-texto alinhar"
+      [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+      <div class="alinhar" *ngIf="f.name.errors.required">Informe seu nome!</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="alinhar" for="email">E-mail</label>
+    <input type="text" formControlName="email" class="area-texto alinhar"
+      [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+      <div class="alinhar" *ngIf="f.email.errors.required">Informe seu email!</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="alinhar" for="age">Idade</label>
+    <input type="text" formControlName="age" class="area-texto alinhar"
+      [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+    <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+      <div class="alinhar" *ngIf="f.age.errors.required">Informe sua idade!</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="alinhar" for="password">Senha</label>
+    <input type="text" formControlName="password" class="area-texto alinhar"
+      [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div class="alinhar" *ngIf="f.password.errors.required">Informe sua senha!</div>
+      <div class="alinhar" *ngIf="f.password.errors.minLength">A senha tem que ter no minimo 6 caracteres!</div>
+    </div>
+  </div>
+  <br>
+  <div class="form-group">
+    <button type="submit" class="botao-default alinhar">Salvar</button>
+  </div>
+  <br />
   <div>
-    <br>
-    <div>
-      <button type="submit" class="botao-default alinhar">Salvar</button>
-    </div>
-    <br />
-    <div>
-      <button type="button" class="alinhar cadastro" [routerLink]="['/login']">Cancelar</button>
-    </div>
-
-    <app-rodape></app-rodape>
+    <button type="button" class="alinhar cadastro" routerLink="['/login']">Cancelar</button>
+  </div>
+  <app-rodape></app-rodape>

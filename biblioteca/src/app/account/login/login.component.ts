@@ -1,36 +1,62 @@
-import { AccountService } from '../shared/account.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService, AlertService } from '../services';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
-  login = {
-    email: '',
-    password: ''
-  }
+  loginForm!: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl!: string;
 
   constructor(
-    private accountService: AccountService,
-    private router: Router
-  ) { }
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private alertService: AlertService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+
+    this.authenticationService.logout();
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  async onSubmit(){
-    try{
-      const result = await this.accountService.login(this.login);
-      console.log(`login efetuado: ${result}`);
+  get f() {
+    return this.loginForm.controls;
+  }
 
-      this.router.navigate(['/cadastrar-livro']);
-    }catch (error){
-      console.log(error);
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
     }
-  }
 
+    this.loading = true;
+    this.authenticationService
+      .login(this.f['username'].value, this.f['password'].value)
+      .pipe(first())
+      .subscribe(
+        (data) => {
+          this.router.navigate([this.returnUrl]);
+        },
+        (error) => {
+          this.alertService.error(error);
+          this.loading = false;
+        }
+      );
+  }
 }

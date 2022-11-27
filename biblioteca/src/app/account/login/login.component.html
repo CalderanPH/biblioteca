@@ -1,23 +1,34 @@
 <app-cabecalho></app-cabecalho>
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-  <br /><br />
-  <div>
-    <br />
-    <h1 class="alinhar">LOGIN</h1>
-    <br />
-    <label class="alinhar">Login</label>
-    <input class="area-texto alinhar" type="email" name="email" id="email" [(ngModel)]="login.email" required />
-    <label class="alinhar">Senha</label>
-    <input class="area-texto alinhar" type="password" name="password" id="password" [(ngModel)]="login.password"
-      required />
+<br /><br />
+<br />
+<h1 class="alinhar">LOGIN</h1>
+<br />
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label class="alinhar" for="email">Login</label>
+    <input type="text" loginForm="username" class="area-texto alinhar"
+      [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+      <div class="alinhar" *ngIf="f.username.errors?.['required']">O Email não informado</div>
+    </div>
   </div>
-  <br />
-  <div>
-    <button type="submit" class="botao-default alinhar" [disabled]="form.form.invalid">Entrar</button>
+  <div class="form-group">
+    <label class="alinhar" for="password">Login</label>
+    <input type="text" loginForm="password" class="area-texto alinhar"
+      [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+      <div class="alinhar" *ngIf="f.password.errors?.['required']">A Senha não informada</div>
+    </div>
   </div>
-  <br />
+  <br>
   <div>
-    <button type="button" class="alinhar cadastro" [routerLink]="['/cadastrar-usuario']">Cadastrar sua conta</button>
+    <button type="submit" class="botao-default alinhar">Entrar</button>
+  </div>
+  <br>
+  <div>
+    <button type="button" class="alinhar cadastro" [routerLink]="['/cadastro-usuario']">Cadastrar sua
+      conta</button>
   </div>
 </form>
 <app-rodape></app-rodape>
