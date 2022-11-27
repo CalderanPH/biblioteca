@@ -31,14 +31,14 @@ export class CadastroUsuarioComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-onSubmit() {
+async onSubmit() {
   this.submitted = true;
 
   if (this.registerForm.invalid) {
     return;
   }
 
-  this.userService
+  await this.userService
     .register(this.registerForm.value)
     .pipe(first())
     .subscribe(
@@ -51,4 +51,5 @@ onSubmit() {
       }
     );
 }
+
 }
