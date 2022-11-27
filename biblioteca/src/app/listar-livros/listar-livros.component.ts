@@ -8,6 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ListarLivrosComponent implements OnInit {
   @Input() listaDeLivros: any;
 
+  livros = [
+    'nome',
+    'quantidadedePaginas',
+    'geenro',
+    'autor',
+    'editora'
+  ];
+
   constructor() { }
 
   ngOnInit(): void {
