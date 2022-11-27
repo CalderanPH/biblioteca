@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Paulo Henrique Calderan",
+      "email": "paulo_calderan@outlook.com",
+      "age": "27",
+      "password": "123456"
+    }
+  ],
+  "livros": [
+    {
+      "id": 1,
+      "nome": "Senhor dos Aneis",
+      "quantidadePaginas": "1.202",
+      "genero": "some comment",
+      "autor": "J. R. R. Tolkien",
+      "editora": "John Gilbert"
+    }
+  ]
+}
