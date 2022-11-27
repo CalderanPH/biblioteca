@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../shared/account.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { first } from 'rxjs';
+import { UserService, AlertService } from '../services';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -7,24 +10,45 @@ import { AccountService } from '../shared/account.service';
   styleUrls: ['./cadastro-usuario.component.css'],
 })
 export class CadastroUsuarioComponent implements OnInit {
-  account = {
-    nome: '',
-    email: '',
-    idade: '',
-    password: '',
-  };
+  registerForm!: FormGroup;
+  submitted = false;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService,
+    private alertService: AlertService
+  ) { }
 
-  ngOnInit(): void {}
-
-  async onSubmit() {
-    try {
-      const result = await this.accountService.createAccount(this.account);
-
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      age: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
+
+  get f() { return this.registerForm.controls; }
+
+onSubmit() {
+  this.submitted = true;
+
+  if (this.registerForm.invalid) {
+    return;
+  }
+
+  this.userService
+    .register(this.registerForm.value)
+    .pipe(first())
+    .subscribe(
+      (data) => {
+        this.alertService.success('Registration successful', true);
+        this.router.navigate(['/login']);
+      },
+      (error) => {
+        this.alertService.error(error);
+      }
+    );
+}
 }

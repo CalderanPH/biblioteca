@@ -1,6 +1,5 @@
-import { AuthGuard } from './account/shared/auth.guard';
+import { AuthGuard } from './account/guards/auth.guard';
 import { LoginComponent } from './account/login/login.component';
-import { AuthenticationComponent } from './layout/authentication/authentication.component';
 import { CadastroLivrosComponent } from './cadastro-livros/cadastro-livros.component';
 import { HomeComponent } from './layout/home/home.component';
 import { NgModule } from '@angular/core';
@@ -14,15 +13,11 @@ const routes: Routes = [
     children: [{ path: '', component: CadastroLivrosComponent }],
     canActivate: [AuthGuard],
   },
-  {
-    path: '',
-    component: AuthenticationComponent,
-    children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'cadastrar-usuario', component: CadastroUsuarioComponent },
-    ],
-  },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'cadastro-usuario', component: CadastroUsuarioComponent },
+
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
