@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService, AlertService } from '../services';
+import { AuthenticationService } from '../services';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -39,24 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    const credentials = this.loginForm.value;
 
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    this.loading = true;
-    this.authenticationService
-      .login(this.f['username'].value, this.f['password'].value)
-      .pipe(first())
-      .subscribe(
-        (data) => {
-          this.router.navigate([this.returnUrl]);
-        },
-        (error) => {
-          this.alertService.error(error);
-          this.loading = false;
-        }
-      );
+    localStorage.setItem('credentials', credentials);
   }
 }

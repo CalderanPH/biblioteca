@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { first } from 'rxjs';
-import { UserService, AlertService } from '../services';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -15,9 +12,6 @@ export class CadastroUsuarioComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private userService: UserService,
-    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -31,25 +25,12 @@ export class CadastroUsuarioComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-async onSubmit() {
-  this.submitted = true;
+onSubmit() {
+  const user = this.registerForm.value;
 
-  if (this.registerForm.invalid) {
-    return;
-  }
+  localStorage.setItem("user", user);
 
-  await this.userService
-    .register(this.registerForm.value)
-    .pipe(first())
-    .subscribe(
-      (data) => {
-        this.alertService.success('Registration successful', true);
-        this.router.navigate(['/login']);
-      },
-      (error) => {
-        this.alertService.error(error);
-      }
-    );
+  window.alert("Cadastro realizado com sucesso!");
 }
 
 }

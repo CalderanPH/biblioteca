@@ -1,0 +1,12 @@
+<h3 class="alinhar">Lista de Livros</h3>
+<br>
+<div class="alinhar" *ngFor="let book of books">
+  <p> {{book.nome}} </p>
+  <p> {{book.quantidadePaginas}} </p>
+  <p> {{book.genero}} </p>
+  <p> {{book.autor}} </p>
+  <p> {{book.editora}} </p>
+</div>
+<div>
+  <button type="button" class="alinhar cadastro" routerLink="/livros/cadastro-livro">Cadastrar Novo Livro</button>
+</div>

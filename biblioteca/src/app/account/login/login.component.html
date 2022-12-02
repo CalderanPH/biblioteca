@@ -1,9 +1,8 @@
-<app-cabecalho></app-cabecalho>
 <br /><br />
 <br />
 <h1 class="alinhar">LOGIN</h1>
 <br />
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" >
 
   <div class="form-group">
     <label class="alinhar" for="email">Login</label>
@@ -14,7 +13,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label class="alinhar" for="password">Login</label>
+    <label class="alinhar" for="password">Senha</label>
     <input type="text" loginForm="password" class="area-texto alinhar"
       [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -23,12 +22,11 @@
   </div>
   <br>
   <div>
-    <button type="submit" class="botao-default alinhar">Entrar</button>
+    <button type="submit" class="botao-default alinhar" (click)="onSubmit()" routerLink="/livros/listar-livros">Entrar</button>
   </div>
   <br>
   <div>
-    <button type="button" class="alinhar cadastro" [routerLink]="['/cadastro-usuario']">Cadastrar sua
+    <button type="button" class="alinhar cadastro" routerLink="/cadastro-usuario">Cadastrar sua
       conta</button>
   </div>
 </form>
-<app-rodape></app-rodape>

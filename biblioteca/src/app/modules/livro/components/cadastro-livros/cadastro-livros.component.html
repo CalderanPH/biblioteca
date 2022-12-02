@@ -1,0 +1,31 @@
+<form>
+  <br /><br />
+  <br /><br />
+  <br /><br />
+  <div>
+    <h1 class="alinhar">Cadastro Livro</h1>
+    <label class="alinhar">Nome</label>
+    <input class="area-texto alinhar" type="text" name="nome" id="nome" pattern="[A-Za-zÀ-ú\s]+$" required />
+    <label class="alinhar">Quantidade de Páginas</label>
+    <input class="area-texto alinhar" type="quantidadePaginas" name="quantidadePaginas" id="quantidadePaginas"
+      pattern="[0-9]+$" required />
+    <label class="alinhar">Gênero</label>
+    <input class="area-texto alinhar" type="genero" name="genero" id="genero" pattern="[A-Za-zÀ-ú\s]+$" required />
+    <label class="alinhar">Autor</label>
+    <input class="area-texto alinhar" type="autor" name="autor" id="autor" pattern="[A-Za-zÀ-ú\s]+$" required />
+    <label class="alinhar">Editora</label>
+    <input class="area-texto alinhar" type="editora" name="editora" id="editora" pattern="[A-Za-zÀ-ú\s]+$" required />
+  </div>
+  <div>
+    <br />
+    <div>
+      <button type="submit" class="botao-default alinhar" (click)="onSubmit()">Salvar</button>
+    </div>
+    <br />
+    <div>
+      <button type="submit" class="alinhar cadastro" routerLink="/livros/listar-livros">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</form>
