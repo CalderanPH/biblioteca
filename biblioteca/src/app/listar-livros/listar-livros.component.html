@@ -1,10 +1,11 @@
 <app-cabecalho></app-cabecalho>
-<form>
   <h3 class="alinhar">Lista de Livros</h3>
   <br>
-  <label class="area-texto">{{listaDeLivros}}</label>
+  <ul>
+    <li *ngFor="listaDeLivros" {{listaDeLivros}}>
+
+    </li>
   <div>
     <button type="button" class="alinhar cadastro" routerLink="['/cadastro-livros']">Cadastrar Novo Livro</button>
   </div>
-</form>
 <app-rodape></app-rodape>
